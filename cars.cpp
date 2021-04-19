@@ -68,7 +68,7 @@ int main()
 	Cars* cCarArray = new Cars[iCarQty];
 	for (int i = 0; i < iCarQty; i++) cCarArray[i].GetData();
 	for (int i = 0; i < iCarQty; i++) cCarArray[i].OutData();
-
+	/* сортировка */
 	for (int i = 0; i < iCarQty; i++) {
 		for (int j = 0; j < iCarQty-1; j++) {
 			if  (cCarArray[j].year > cCarArray[j + 1].year) {
@@ -78,6 +78,7 @@ int main()
 			}
 		}
 	}
+	/* end сортировка */
 	NewLine();
 	cout << "Sorted";
 	NewLine();
