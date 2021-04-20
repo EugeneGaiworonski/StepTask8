@@ -6,6 +6,7 @@
 // Написать функцию, удаляющую столбец двухмерного массива
 // по указанному номеру.
 
+#include <conio.h>
 #include <iostream>
 #include <string>
 #define SPACE ' ';
@@ -47,12 +48,13 @@ int main()
   InitArray(iArr, iDY, iDX);
   PrintArray(iArr, iDY, iDX);
   NewLine();
-  InsertColumn(iArr, iDY, iDX, 0, 7);
+  InsertColumn(iArr, iDY, iDX, 3, -1);
   PrintArray(iArr, iDY, iDX+1);
   NewLine();
   DeleteColumn(iArr,iDY, iDX+1, 3);
   PrintArray(iArr, iDY, iDX);
   delete[] iArr;
+  _getche();
   return 0;
 }
 
@@ -73,17 +75,18 @@ void DeleteColumn(int** iArr, int iY, int iX, int iPos)
 
 void InsertColumn(int** iArr, int iY, int iX, int iPos, int iValue)
 {
-  int* iBuffer = new int[iX+1]; for (int i = 0; i <= iX; i++) iBuffer[i] = 0;
+  int* iBuffer = new int[iX+1]; 
+  for (int i = 0; i <= iX; i++) iBuffer[i] = 0;
+  
   for (int y = 0; y < iY; y++) {
-      for (int x = 0; x < iX; x++) {
-        *(iBuffer+x) = *(*(iArr+y)+x);
-        }
-      delete[] *(iArr+y);
+      for (int x = 0; x < iX; x++) iBuffer[x] = iArr[y][x];
+	  delete[] *(iArr+y);
       *(iArr+y) = new int[iX+1];
-      for (int x = 0; x < iPos; x++) *(*(iArr+y)+x) = *(iBuffer+x);
-      *(*(iArr+y)+iPos) = iValue;
-      for (int x = iPos+1; x < iX; x++) *(*(iArr+y)+x) = *(iBuffer+x);
-    }
+      for (int x = 0; x < iPos; x++) iArr[y][x] = iBuffer[x];
+      iArr[y][iPos] = iValue;
+      for (int x = iPos+1; x <= iX; x++) iArr[y][x] = iBuffer[x-1];	 
+   }
+  delete[] iBuffer;
 }
 
 int** CreateArray(int iY, int iX)
@@ -119,7 +122,8 @@ void InitArray(int** iArr, int iY, int iX)
   for (int i = 0; i < iY; i++) {
       for (int j = 0; j < iX; j++) {
           iArr[i][j] = rand() % 10;
-        }
+		  //iArr[i][j] = j;  
+	  }
     }
 }
 
