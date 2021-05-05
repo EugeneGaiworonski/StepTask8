@@ -10,7 +10,7 @@ using std::cin; using std::cout;
 enum transmission {
 	MANUAL = 1 ,
 	AUTOMATIC = 2, 
-	OTHER = 8
+	TOTHER = 3
 };
 
 enum color {
@@ -53,6 +53,9 @@ void PrintTransmission(CarData value)
 	case AUTOMATIC:
 		cout << "automatic";
 		break;
+	case TOTHER:
+		cout << "other";
+		break;
 	default:
 		cout << "undefined";
 		break;
@@ -79,7 +82,7 @@ void PrintWheel(CarData value)
 	cout << "\nWheel diameterEngine (in): " << value.iWheel;
 }
 
-bool IsPower(CarData value, int Wheel)
+bool IsWheel(CarData value, int Wheel)
 {
 	if (value.iWheel == Wheel) return true;
 	else return false;
